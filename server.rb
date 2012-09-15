@@ -6,8 +6,8 @@ get '/' do
 end
 
 # HTML comment stage
-get '/requestforcomment' do
-  haml :htmlcomment
+get '/usethesourceluke' do
+  haml :passwordinsource
 end
 
 # Large leaked file full of hashed passwords
