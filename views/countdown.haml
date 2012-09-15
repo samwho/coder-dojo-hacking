@@ -1,0 +1,101 @@
+!!!5
+
+%html
+  %head
+    %title THE END OF THE WORLD!
+    %style
+      :sass
+        @font-face
+          font-family: 'transponder_aoeregular'
+          src: url('transponder.eot')
+          src: url('transponder.eot?#iefix') format('embedded-opentype'), url('transponder.woff') format('woff'), url('transponder.ttf') format('truetype'), url('transponder.svg#transponder_aoeregular') format('svg')
+        html, body
+          width: 100%
+          height: 100%
+          margin: 0
+          padding: 0
+          font-family: 'Helvetica Neue', Helvetica, Arial, Sans-Serif
+        html
+          display: table
+        body
+          display: table-cell
+          vertical-align: middle
+          background: url('mission-control.jpg') center center no-repeat
+          background-size: 100%
+        #page
+          padding: 25px
+          background: rgba(0,0,0,.75)
+          text-align: center
+          color: #fff
+        h1
+          text-transform: uppercase
+          font-weight: bold
+          font-size: 24px
+          margin: 0 0 .5em 0
+          padding: 0
+        h2
+          text-transform: uppercase
+          font-weight: normal
+          font-size: 18px
+          margin: 0
+          padding: 0
+        #countdown
+          padding: 10px
+          color: #f30
+          font-size: 112px
+          font-weight: bold
+          letter-spacing: .15em
+          font-family: transponder_aoeregular, Monaco, Monospaced
+        input
+          width: 12em
+          padding: .25em
+          font-size: 36px
+          font-weight: bold
+          border: 2px solid #000
+          border-radius: 10px
+          text-align: center
+          outline: none
+        button
+          background: #cf0
+          border: none
+          margin: 0
+          padding: .25em .5em
+          font-size: 36px
+          font-weight: bold
+          text-transform: uppercase
+          font-family: inherit
+          border-radius: 5px
+
+    :javascript
+      window.onload = function() {
+        var blink = true;
+        var end = 1349532000 * 1000;
+        var countdown = document.getElementById('countdown');
+        var pad = function(n) {
+          var s = n.toString()
+          if(s.length===1) return '0'+s;
+          return s;
+        };
+        var timeRemaining = function() {
+          var now = new Date().getTime();
+          var diff = Math.round((end - now) / 1000);
+          var mins = (diff / 60) % 60
+          var hrs = diff / 3600
+          ret = pad(Math.floor(hrs)) + ':' + pad(Math.floor(mins)) + ':' + pad((diff % 60))
+          return ret;
+        };
+        var printTime = function() { countdown.innerHTML = timeRemaining(); };
+        setInterval(printTime, 500);
+        printTime()
+      }
+
+  %body
+    #page
+      %h1 Laser Control Centre
+      %h2 The world will end in&hellip;
+      #countdown 00:00:00
+
+      %form#password{method:'post', action:'/savetheworld'}
+        %input{type:'password', name:'password', placeholder:"SHHHH, DON'T TELL..."}
+        %button Abort!
+

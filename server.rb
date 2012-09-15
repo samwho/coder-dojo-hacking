@@ -1,6 +1,8 @@
 require "bundler"
 Bundler.require
 
+MASTER_PASSWORD = 'password'
+
 get '/' do
   haml :index
 end
@@ -38,4 +40,15 @@ end
 # JS function to run in the console
 get '/funktion' do
   haml :function
+end
+
+
+# the final countdown
+get "/endoftheworld" do
+  haml :countdown, layout: false
+end
+
+post "/savetheworld" do
+  redirect('/endoftheworld') unless params[:password] == MASTER_PASSWORD
+  haml :relax, layout: false
 end
