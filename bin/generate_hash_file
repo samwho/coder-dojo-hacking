@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'randexp'
+require 'digest/md5'
+
+def hash string
+  Digest::MD5.hexdigest string
+end
+
+def random_phrase
+  /\w+{4,6}(_\w{4,6}(_\d{3})?)?/.gen.downcase
+end
+
+def random_password
+  /.{6,12}/.gen
+end
+
+emails = []
+
+# Generate 1000 random emails
+1000.times do
+  emails << "#{random_phrase}@example.com"
+end
+
+# Map them all to give them a random password
+emails = emails.uniq.map do |email|
+  "#{email}\t#{hash(random_password)}"
+end
+
+# Insert our known address
+emails << "alice@example.com\t#{hash("password123")}"
+emails.shuffle!
+
+# Print them all out
+emails.each { |email| puts email }
