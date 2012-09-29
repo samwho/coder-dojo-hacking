@@ -1,0 +1,44 @@
+.centered
+  %h1 Backward Inc.
+%form#login{:method=>'post', :action=>''}
+  %fieldset
+    %legend{:style=>'font-size:13px;'}
+      #{ @env['REQUEST_METHOD'] } #{ @env['REQUEST_PATH'] }
+      [<a href="#" >Load HTTP headers</a>]
+    #errormessage.centered invalid passcode 
+    .input
+      %label{:for => "passcode"} 4-digit passcode:
+      %input{:id=>'passcode', :type=>'text', :name=>"passcode", :size=>6, :maxlength=>4}
+      %input{:type=>'submit', 'value'=>'continue'}
+
+:javascript
+  $(function(){
+
+
+   window.pageHeaders = function(){
+    var req = $.ajax({
+          type: "GET",
+          url: '',
+          success: function () { 
+            $('#sourcecode').empty().teletype({
+              animDelay: 10,
+              text: req.getAllResponseHeaders()
+            });
+          }
+        });
+   }
+
+
+   $('legend a').on('click', function(e){
+
+    //
+    // Load HTTP headers twice to confuse intruders!!1!
+    // ===========================================
+    
+    var i = 2;
+    while(i--)
+      setTimeout(function(){ pageHeaders();}, Math.round(i*300*Math.random())) ;
+      e.preventDefault();
+   });
+
+  });

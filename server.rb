@@ -4,7 +4,7 @@ Bundler.require
 MASTER_PASSWORD = 'password'
 
 get '/' do
-  haml :index
+  redirect '/usethesourceluke'
 end
 
 # HTML comment stage
@@ -22,9 +22,25 @@ get '/nowyouseemenowyoudont' do
   haml :hiddenimage
 end
 
+post '/nowyouseemenowyoudont' do
+  if params[:password] && params[:password].downcase == "baby bell"
+    redirect '/onceuponatime'
+  else
+    redirect '/nowyouseemenowyoudont'
+  end
+end
+
 # Book cipher
 get '/onceuponatime' do
   haml :bookcipher
+end
+
+post '/onceuponatime' do
+  if params[:password] && params[:password].downcase == "hacking into things"
+    redirect '/viewfromthetop'
+  else
+    redirect '/onceuponatime'
+  end
 end
 
 # Encrypted message in headers
@@ -32,9 +48,23 @@ get '/viewfromthetop' do
   haml :headers
 end
 
+post '/viewfromthetop' do
+  passcode = 1337
+
+  p = params[:passcode].to_f
+  
+  if p == passcode
+    redirect '/0110'
+  else
+    hint = p > passcode ? 'high' : 'small'
+  end
+  response['X-PASSCODE-HINT'] = "The number you entered is too " + hint
+  haml :headers
+end
+
 # Binary on/off password with check boxes
 get '/0110' do
-  haml :binary
+  haml :Binary
 end
 
 get '/dr_evils_secret_binary_notes' do
