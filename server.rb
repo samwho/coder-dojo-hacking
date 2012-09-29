@@ -22,9 +22,25 @@ get '/nowyouseemenowyoudont' do
   haml :hiddenimage
 end
 
+post '/nowyouseemenowyoudont' do
+  if params[:password] && params[:password].downcase == "baby bell"
+    redirect '/onceuponatime'
+  else
+    redirect '/nowyouseemenowyoudont'
+  end
+end
+
 # Book cipher
 get '/onceuponatime' do
   haml :bookcipher
+end
+
+post '/onceuponatime' do
+  if params[:password] && params[:password].downcase == "hacking into things"
+    redirect '/viewfromthetop'
+  else
+    redirect '/onceuponatime'
+  end
 end
 
 # Encrypted message in headers
