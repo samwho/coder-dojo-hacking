@@ -37,11 +37,14 @@ get '/0110' do
   haml :binary
 end
 
+get '/dr_evils_secret_binary_notes' do
+  haml :dr_evils_secret_binary_notes
+end
+
 # JS function to run in the console
 get '/funktion' do
   haml :function
 end
-
 
 # the final countdown
 get "/endoftheworld" do
