@@ -4,7 +4,7 @@ Bundler.require
 MASTER_PASSWORD = 'password'
 
 get '/' do
-  haml :index
+  haml :index # DR Evil's public
 end
 
 # HTML comment stage
@@ -32,9 +32,24 @@ get '/viewfromthetop' do
   haml :headers
 end
 
+post '/viewfromthetop' do
+
+  passcode = 1337
+  p = params[:passcode].to_f
+  
+  if p > 1337
+    error = "Passcode is too large"
+  else
+    error "Passcode is too small"
+  end
+
+  response['X-VALIDATION-ERROR'] = "Validation error: " + error
+  haml :headers
+end
+
 # Binary on/off password with check boxes
 get '/0110' do
-  haml :binary
+  haml :Binary
 end
 
 # JS function to run in the console
