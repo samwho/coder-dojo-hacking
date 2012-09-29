@@ -4,7 +4,7 @@ Bundler.require
 MASTER_PASSWORD = 'password'
 
 get '/' do
-  haml :index
+  redirect '/usethesourceluke'
 end
 
 # HTML comment stage
