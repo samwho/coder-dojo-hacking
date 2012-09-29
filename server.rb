@@ -73,7 +73,7 @@ end
 
 # JS function to run in the console
 get '/funktion' do
-  haml :function
+  haml :funktion
 end
 
 # the final countdown
