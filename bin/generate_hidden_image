@@ -1,0 +1,3 @@
+cat public/dr-evil.jpg > public/dr-evil-hidden.jpg
+cat public/secret-message.txt >> public/dr-evil-hidden.jpg
+cat public/dr-evil-hidden.jpg
