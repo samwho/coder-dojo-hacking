@@ -49,17 +49,16 @@ get '/viewfromthetop' do
 end
 
 post '/viewfromthetop' do
-
   passcode = 1337
+
   p = params[:passcode].to_f
   
-  if p > 1337
-    error = "Passcode is too large"
+  if p == passcode
+    redirect '/0110'
   else
-    error "Passcode is too small"
+    hint = p > passcode ? 'high' : 'small'
   end
-
-  response['X-VALIDATION-ERROR'] = "Validation error: " + error
+  response['X-PASSCODE-HINT'] = "The number you entered is too " + hint
   haml :headers
 end
 
