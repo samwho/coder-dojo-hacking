@@ -45,20 +45,27 @@ end
 
 # Encrypted message in headers
 get '/viewfromthetop' do
+  response['X-PASSCODE-HINT'] = "Hints are shown after the form is submitted"
   haml :headers
 end
 
 post '/viewfromthetop' do
   passcode = 1337
 
-  p = params[:passcode].to_f
+  p = params[:passcode].to_i
   
   if p == passcode
     redirect '/0110'
   else
-    hint = p > passcode ? 'high' : 'small'
+    if p > 0
+      hint = p > passcode ? 'subtract ' + (p - passcode).to_s : 'add ' + (passcode - p).to_s
+    else
+      hint = "The passcode has 4 digits"
+    end
   end
-  response['X-PASSCODE-HINT'] = "The number you entered is too " + hint
+
+  response['X-PASSCODE-HINT'] = hint
+  
   haml :headers
 end
 
