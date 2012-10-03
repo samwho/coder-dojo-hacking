@@ -17,6 +17,14 @@ get '/needleinahaystack' do
   haml :leakedfile
 end
 
+post '/needleinahaystack' do
+  if params[:password] && params[:password].downcase == "baby bell"
+    redirect '/nowyouseemenowyoudont'
+  else
+    redirect '/needleinahaystack'
+  end
+end
+
 # Hidden in an image
 get '/nowyouseemenowyoudont' do
   haml :hiddenimage
