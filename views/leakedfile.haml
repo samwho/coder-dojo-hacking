@@ -1,0 +1,15 @@
+.centered
+  %h1 Backward Inc.
+  %h5 Evil Diary, 4th October 2012
+  %p Scott managed to email the EvilHQ file containing everyone's password to the whole world! Fortunately the passwords were 'encrypted', which apparently means they were hidden using a really really difficult code called <i>MD5</i>, so I think EvilHQ is safe for now.
+
+  %a{href: "/leaked_password_file.tsv"} Here is the file - 
+  NOTE TO SELF remember to delete it before anyone tries to decode my password!
+
+  %br
+  %br
+  %form{:method => 'post', :action => '/needleinahaystack'}
+    %input{:name => 'password', :placeholder => "password..."}
+    %input{:type => 'submit', :value => 'Continue'}
+  %p
+    %img{:src => "/google.jpg", :title => 'Hopefully no one will think to use Google to look up decoding MD5 codes!'}
