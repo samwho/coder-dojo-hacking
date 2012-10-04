@@ -12,6 +12,14 @@ get '/usethesourceluke' do
   haml :passwordinsource
 end
 
+post '/usethesourceluke' do
+  if params[:password] && params[:password] == "EvilIsTheBest"
+    redirect '/needleinahaystack'
+  else
+    redirect '/usethesourceluke'
+  end
+end
+
 # Large leaked file full of hashed passwords
 get '/needleinahaystack' do
   haml :leakedfile
