@@ -22,14 +22,14 @@ end
 
 # Large leaked file full of hashed passwords
 get '/needleinahaystack' do
-  haml :leakedfile
+  haml :leakedfile, :locals => {:validationerror=>false}
 end
 
 post '/needleinahaystack' do
-  if params[:password] && params[:password].downcase == "baby bell"
+  if params[:password] && params[:password].downcase == "password123"
     redirect '/nowyouseemenowyoudont'
   else
-    redirect '/needleinahaystack'
+    haml :leakedfile, :locals => {:validationerror=>true}
   end
 end
 

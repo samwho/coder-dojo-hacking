@@ -8,7 +8,8 @@
 
   %br
   %br
-  %form{:method => 'post', :action => '/needleinahaystack'}
+  %form{:method => 'post', :action => '/needleinahaystack', :class=>(validationerror ? 'error': nil)}
+    #errormessage.centered invalid password
     %input{:name => 'password', :placeholder => "password..."}
     %input{:type => 'submit', :value => 'Continue'}
   %p
