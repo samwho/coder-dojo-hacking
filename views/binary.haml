@@ -1,0 +1,97 @@
+- if params[:question_number].to_i > 3
+  QUESTION NUMBER IS TOO HIGH - ARE YOU TRYING TO HACK ME??
+- else
+
+  %h1 PROVE YOU ARE REALLY DR. EVIL
+  %p Solve some problems that are so difficult that only Dr. Evil himself could solve them...
+
+  %div#main
+    %p
+      %span#num1 
+      x 
+      %span#num2
+      \= ???
+
+    - n = 8
+    - n.times.each do |i|
+      %input{type: 'checkbox', id: "chk_binary_#{n - i - 1}"} 
+    %br
+    %input{type: 'submit', value: "SUBMIT ANSWER", id: "verify_answer"}
+
+    - 15.times do |i| 
+      %br
+    %a{ href: "/dr_evils_secret_binary_notes", target: "_blank" }
+      (Dr. Evil's notes in case he forgets how to do this. IF YOU ARE NOT DR. EVIL THEN DO NOT CLICK. I'M SUPER SERIOUS)
+
+:javascript
+  $(document).ready(function() {
+    $(':checkbox').iphoneStyle();
+    $('#verify_answer').bind("click", function(){
+      verifyAnswer();
+    })
+  });
+
+  var questionParams = [
+    {
+      num1: 1,
+      num2: 1,
+    },
+    {
+      num1: 2,
+      num2: 2
+    },
+    {
+      num1: 3,
+      num2: 3
+    }
+  ];
+  var wrongAnswerCount = 0;
+
+  function setupQuestion(questionNumber) {
+    if(questionNumber > questionParams.length){
+      $("#main").html("<h3>Well done! You are clearly Dr. Evil himself. Click <a href='/funktion'>here</a> to log into the inner area.");
+      return;
+    }
+    wrongAnswerCount = 0; 
+    $(":checkbox").each(function(){
+      if($(this).attr("checked")) {
+        $(this).click();
+      }
+    })
+    questionIndex = questionNumber - 1;
+    $("#num1").html(questionParams[questionIndex].num1);
+    $("#num2").html(questionParams[questionIndex].num2);
+  }
+
+  function verifyAnswer() {
+    currentQuestionParams = questionParams[questionNumber - 1];
+    expectedAns = currentQuestionParams.num1 * currentQuestionParams.num2;
+    theirAns = 0;
+    for(var i=0; i<11; i++){
+      theirAns += Math.pow(2, i) * ($("#chk_binary_" + i).attr("checked") ? 1 : 0);
+    }
+    
+    if(theirAns == expectedAns){
+      alert("Well done your evilness! You really are a clever one.");
+      questionNumber++;
+      setupQuestion(questionNumber);
+    }
+    else{
+      message = "";
+      wrongAnswerCount++;
+      if(wrongAnswerCount > 0){
+        message = "Sorry sir, that isn't right. Are you sure you're Dr.Evil?";
+      } else if(wrongAnswerCount > 2){
+        message = "Hmmm, I'm starting to get suspicious...";
+      }
+      else if(wrongAnswerCount > 5){
+        message = "Why don't you stick your hand in the air and see if someone can help you?"
+      }
+      alert(message);
+    }
+  }
+
+  $(document).ready(function() {
+    questionNumber = #{params[:question_number] || 1};
+    setupQuestion(questionNumber);
+  });

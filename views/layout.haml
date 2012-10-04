@@ -4,6 +4,26 @@
     %title Backward Inc
     %link{:rel=>"stylesheet", :href=>"http://css.cdn.tl/normalize.css"}
     %script{:type =>'text/javascript', :src => '//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'}
+    %script{:type => 'text/javascript', :src => '/js/iphone_style_checkboxes.js'}
+    %link{:rel => "stylesheet", :href => '/css/iphone_style_checkboxes.css'}
+    :javascript
+      $.fn.teletype = function(opts){
+
+          var $this = this,
+              defaults = {
+                  animDelay: 50
+              },
+              settings = $.extend(defaults, opts);
+          
+          $.each(settings.text, function(i, letter){
+
+
+              setTimeout(function(){
+                  $this.html($this.html() + letter);
+              }, settings.animDelay * i);
+          });
+      }
+
     %style{:type=>'text/css'}
       :sass
         html
@@ -51,7 +71,7 @@
     #wrapper{:style=>'z-index:50;position:relative'}
       =yield
     #userinfo{:style=>'text-align:center;'}
-      User #123 - IP 123.123.87.12
+      IP #{ @env['REMOTE_ADDR'] }
     %pre#sourcecode{:style=>'position:absolute; height:100%; width:100%;top:0px; left:0px; opacity:0.6; z-index:40; font-size:.9em;'}
 
 

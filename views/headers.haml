@@ -1,0 +1,16 @@
+.centered
+  %h1 Backward Inc.
+  %h2 Ok, this is becoming embarrassing...
+  %img{:src=>'http://cdn.newsday.com/polopoly_fs/1.838983.1245813179!/image/2131447818.jpg_gen/derivatives/feature_416/2131447818.jpg'}
+  %h3 This next form is 100% secure since no password is hidden in the source of this page!
+  %p Use of the consoler
+
+%form#login{:method=>'post', :action=>''}
+  %fieldset
+    %legend{:style=>'font-size:13px;'}
+      #{ @env['REQUEST_METHOD'] } #{ @env['REQUEST_PATH'] }
+    #errormessage.centered invalid passcode 
+    .input
+      %label{:for => "passcode"} Passcode:
+      %input{:id=>'passcode', :type=>'text', :name=>"passcode", :size=>6, :maxlength=>4}
+      %input{:type=>'submit', 'value'=>'continue'}
