@@ -26,7 +26,7 @@ get '/needleinahaystack' do
 end
 
 post '/needleinahaystack' do
-  if params[:password] && params[:password].downcase == "baby bell"
+  if params[:password] && params[:password].downcase == "password123"
     redirect '/nowyouseemenowyoudont'
   else
     redirect '/needleinahaystack'
@@ -69,7 +69,7 @@ post '/viewfromthetop' do
   passcode = 1337
 
   p = params[:passcode].to_i
-  
+
   if p == passcode
     redirect '/0110'
   else
@@ -81,7 +81,7 @@ post '/viewfromthetop' do
   end
 
   response['X-PASSCODE-HINT'] = hint
-  
+
   haml :headers
 end
 
