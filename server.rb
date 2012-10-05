@@ -52,7 +52,9 @@ get '/onceuponatime' do
 end
 
 post '/onceuponatime' do
-  if params[:password] && params[:password].downcase == "hacking into things"
+  if params[:password] &&
+    (params[:password].downcase == "hacking into things" ||
+     params[:password].downcase == "hackingintothings")
     redirect '/viewfromthetop'
   else
     redirect '/onceuponatime'
