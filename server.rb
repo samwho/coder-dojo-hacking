@@ -1,7 +1,7 @@
 require "bundler"
 Bundler.require
 
-MASTER_PASSWORD = 'password'
+MASTER_PASSWORD = '10000000'
 
 get '/' do
   redirect '/usethesourceluke'
