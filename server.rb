@@ -89,7 +89,7 @@ end
 
 # Binary on/off password with check boxes
 get '/0110' do
-  haml :Binary
+  haml :binary
 end
 
 get '/dr_evils_secret_binary_notes' do
