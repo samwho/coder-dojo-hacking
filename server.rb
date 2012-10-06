@@ -1,7 +1,7 @@
 require "bundler"
 Bundler.require
 
-MASTER_PASSWORD = 'password'
+MASTER_PASSWORD = '10000000'
 
 get '/' do
   redirect '/usethesourceluke'
@@ -61,7 +61,7 @@ end
 
 # Encrypted message in headers
 get '/viewfromthetop' do
-  response['X-PASSCODE-HINT'] = "Hints are shown after the form is submitted"
+  response['X-PASSCODE-HINT'] = "Have a guess! Hints are shown after the first guess"
   haml :headers
 end
 
