@@ -35,20 +35,20 @@ end
 
 # Hidden in an image
 get '/nowyouseemenowyoudont' do
-  haml :hiddenimage
+  haml :hiddenimage, :locals => {:validationerror=>false}
 end
 
 post '/nowyouseemenowyoudont' do
   if params[:password] && params[:password].downcase == "baby bell"
     redirect '/onceuponatime'
   else
-    redirect '/nowyouseemenowyoudont'
+    haml :hiddenimage, :locals => {:validationerror=>true}
   end
 end
 
 # Book cipher
 get '/onceuponatime' do
-  haml :bookcipher
+  haml :bookcipher, :locals => {:validationerror=>false}
 end
 
 post '/onceuponatime' do
@@ -57,14 +57,14 @@ post '/onceuponatime' do
      params[:password].downcase == "hackingintothings")
     redirect '/viewfromthetop'
   else
-    redirect '/onceuponatime'
+    haml :bookcipher, :locals => {:validationerror=>true}
   end
 end
 
 # Encrypted message in headers
 get '/viewfromthetop' do
   response['X-PASSCODE-HINT'] = "Have a guess! Hints are shown after the first guess"
-  haml :headers
+  haml :headers, :locals => {:validationerror=>false}
 end
 
 post '/viewfromthetop' do
@@ -84,7 +84,7 @@ post '/viewfromthetop' do
 
   response['X-PASSCODE-HINT'] = hint
 
-  haml :headers
+  haml :headers, :locals => {:validationerror=>true}
 end
 
 # Binary on/off password with check boxes

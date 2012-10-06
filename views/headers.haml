@@ -5,12 +5,12 @@
   %h3 This next form is 100% secure since no password is hidden in the source of this page!
   %p Use of the browser console is highly prohibited!
 
-%form#login{:method=>'post', :action=>''}
+%form#login{:method=>'post', :class=>(validationerror ? 'error': nil)}
   %fieldset
     %legend{:style=>'font-size:13px;'}
       #{ @env['REQUEST_METHOD'] } #{ @env['REQUEST_PATH'] }
     #errormessage.centered invalid passcode 
-    .input
+    .input{:style=>'display:block !important;'}
       %label{:for => "passcode"} Passcode:
       %input{:id=>'passcode', :type=>'text', :name=>"passcode", :size=>6, :maxlength=>4}
       %input{:type=>'submit', 'value'=>'continue'}

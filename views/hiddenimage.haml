@@ -8,6 +8,7 @@
 
   %p There's more to me than meets the eye...
 
-  %form{:method => 'post', :action => '/nowyouseemenowyoudont'}
+  %form{:method => 'post', :class=>(validationerror ? 'error': nil)}
+    #errormessage.centered invalid password
     %input{:name => 'password', :placeholder => "password..."}
     %input{:type => 'submit', :value => 'Continue'}
