@@ -52,7 +52,9 @@ get '/onceuponatime' do
 end
 
 post '/onceuponatime' do
-  if params[:password] && params[:password].downcase == "hacking into things"
+  if params[:password] &&
+    (params[:password].downcase == "hacking into things" ||
+     params[:password].downcase == "hackingintothings")
     redirect '/viewfromthetop'
   else
     redirect '/onceuponatime'
@@ -69,7 +71,7 @@ post '/viewfromthetop' do
   passcode = 1337
 
   p = params[:passcode].to_i
-  
+
   if p == passcode
     redirect '/0110'
   else
@@ -81,13 +83,13 @@ post '/viewfromthetop' do
   end
 
   response['X-PASSCODE-HINT'] = hint
-  
+
   haml :headers
 end
 
 # Binary on/off password with check boxes
 get '/0110' do
-  haml :Binary
+  haml :binary
 end
 
 get '/dr_evils_secret_binary_notes' do
